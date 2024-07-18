@@ -79,7 +79,7 @@ const createProduct = asyncHandler(async (req, res) => {
       price,
       location,
       category,
-      images,
+      images: req.images,
       seller: req.user._id,
     });
     const createdProduct = await product.save();
