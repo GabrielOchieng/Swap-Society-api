@@ -21,6 +21,20 @@ const getProductById = asyncHandler(async (req, res) => {
   res.status(200).json(product);
 });
 
+const getMyListedProducts = asyncHandler(async (req, res) => {
+  // 1. Check user authorization (assuming middleware is already implemented):
+  if (!req.user) {
+    return res
+      .status(401)
+      .json({ message: "Unauthorized to access listed products" });
+  }
+
+  // 2. Fetch products based on seller ID:
+  const products = await Product.find({ seller: req.user._id });
+
+  res.status(200).json(products);
+});
+
 // Create a product (requires authorization - seller only)
 // const createProduct = asyncHandler(async (req, res) => {
 //   const { title, description, price, location, category, images } = req.body;
@@ -115,6 +129,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 export {
   getProducts,
   getProductById,
+  getMyListedProducts,
   createProduct,
   updateProduct,
   deleteProduct,

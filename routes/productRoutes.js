@@ -2,6 +2,7 @@ import express from "express";
 import {
   getProducts,
   getProductById,
+  getMyListedProducts,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -15,6 +16,13 @@ router.get("/", protect, getProducts);
 
 // Get a single product by ID (public route)
 router.get("/:id", getProductById);
+
+router.get(
+  "/:userId/products",
+  protect,
+  authorize("seller"),
+  getMyListedProducts
+);
 
 // Create a new product (protected route, accessible only to sellers)
 router.post("/", protect, authorize("seller"), createProduct);
