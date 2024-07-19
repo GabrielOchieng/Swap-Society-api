@@ -14,7 +14,11 @@ import { uploadMultiple } from "../middlewares/uploads/uploadMultiple.js";
 const router = express.Router();
 
 // Get all products (public route)
-router.get("/", protect, getProducts);
+router.get(
+  "/",
+  // protect,
+  getProducts
+);
 
 // Get a single product by ID (public route)
 router.get("/:id", getProductById);
