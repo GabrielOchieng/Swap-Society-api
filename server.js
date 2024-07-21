@@ -7,6 +7,7 @@ import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
+import tokenRoute from "./routes/tokenRoute.js";
 
 import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
@@ -28,6 +29,7 @@ app.use("/users", userRoutes);
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
 app.use("/payments", paymentRoutes);
+app.use("/token", tokenRoute);
 
 app.get("/", (req, res) => {
   res.send("Server is ready");

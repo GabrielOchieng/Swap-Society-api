@@ -12,7 +12,7 @@ const getProducts = asyncHandler(async (req, res) => {
 const getProductById = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
-  const product = await Product.findById(id).populate("seller", "name email"); // populate seller details
+  const product = await Product.findById(id).populate("seller"); // populate seller details
 
   if (!product) {
     res.status(404).json({ message: "Product not found" });
