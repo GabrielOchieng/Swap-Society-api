@@ -9,7 +9,7 @@ const createToken = async (req, res, next) => {
 
   await axios
     .get(
-      "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
+      "https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
       {
         headers: {
           authorization: `Basic ${auth}`,
@@ -33,7 +33,7 @@ const stkPush = async (req, res) => {
   const amount = req.body.amount;
   const passkey =
     "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-  const url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
+  const url = "https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
 
   const date = new Date();
   const timestamp =
