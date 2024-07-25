@@ -85,6 +85,16 @@ const getAllUsers = asyncHandler(async (req, res) => {
   res.status(200).json(users);
 });
 
+const getUserById = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ _id: req.params.id }).select("-password");
+
+  if (user) {
+    res.status(200).json(user);
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
+
 const updateUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { name, phoneNumber, email, role } = req.body;
@@ -129,4 +139,5 @@ export {
   getAllUsers,
   updateUser,
   deleteUser,
+  getUserById,
 };

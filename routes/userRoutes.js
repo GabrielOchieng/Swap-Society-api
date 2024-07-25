@@ -4,6 +4,7 @@ import {
   registerUser,
   logOutUser,
   getAllUsers,
+  getUserById,
   deleteUser,
   updateUser,
 } from "../controllers/userController.js";
@@ -22,6 +23,8 @@ router.get(
   //  authorize(["admin", "manager"]),
   getAllUsers
 );
+
+router.get("/:id", getUserById);
 
 // Delete user (protected, accessible only by authorized users)
 router.delete("/:id", protect, authorize(["admin", "manager"]), deleteUser);
