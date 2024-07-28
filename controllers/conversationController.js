@@ -31,23 +31,12 @@ const createConversation = async (req, res) => {
 
 // get conversation
 
-// const getConversation = async (req, res) => {
-//   try {
-//     const conversation = await Conversation.find({
-//       members: { $in: [req.params.userId] },
-//     });
-//     res.status(200).json(conversation);
-//   } catch (error) {
-//     res.status(500).json(err);
-//   }
-// };
-
 const getConversation = async (req, res) => {
   try {
-    const conversation = await Conversation.findOne({
+    const conversation = await Conversation.find({
       members: { $in: [req.params.userId] },
     })
-      .populate('members', 'name'); // Populate members with their names
+      .populate('members'); // Populate members with their names
 
     if (!conversation) {
       return res.status(404).json({ message: 'Conversation not found' });
