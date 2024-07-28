@@ -31,15 +31,34 @@ const createConversation = async (req, res) => {
 
 // get conversation
 
+// const getConversation = async (req, res) => {
+//   try {
+//     const conversation = await Conversation.find({
+//       members: { $in: [req.params.userId] },
+//     });
+//     res.status(200).json(conversation);
+//   } catch (error) {
+//     res.status(500).json(err);
+//   }
+// };
+
 const getConversation = async (req, res) => {
   try {
-    const conversation = await Conversation.find({
+    const conversation = await Conversation.findOne({
       members: { $in: [req.params.userId] },
-    });
+    })
+      .populate('members', 'name'); // Populate members with their names
+
+    if (!conversation) {
+      return res.status(404).json({ message: 'Conversation not found' });
+    }
+
     res.status(200).json(conversation);
   } catch (error) {
-    res.status(500).json(err);
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 
 export { createConversation, getConversation };
