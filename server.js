@@ -50,7 +50,7 @@ const server = app.listen(port, () =>
 );
 
 
-const io = new Server(`https://swap-society-api.onrender.com`, {
+const io = new Server('https://swap-society-api.onrender.com', {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
